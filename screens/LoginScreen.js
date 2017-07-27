@@ -23,7 +23,6 @@ class LoginScreen extends Component {
           //   usePoster={true}
           resizeMode="cover"
           style={StyleSheet.absoluteFill}
-          useNativeControls={false}
           shouldPlay={true}
         />
 
