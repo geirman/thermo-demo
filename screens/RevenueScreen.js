@@ -75,8 +75,6 @@ export default class RevenueScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollview}>
-          {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
           <VictoryPie
             animate={{
               duration: 500
