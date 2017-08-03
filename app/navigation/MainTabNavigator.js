@@ -36,14 +36,14 @@ export default TabNavigator(
           case 'Revenue':
             iconName =
               Platform.OS === 'ios'
-                ? `ios-paper${focused ? '' : '-outline'}`
-                : 'md-paper';
+                ? `ios-cash${focused ? '' : '-outline'}`
+                : 'md-cash';
             break;
           case 'Devices':
             iconName =
               Platform.OS === 'ios'
-                ? `ios-alert${focused ? '' : '-outline'}`
-                : 'md-alert';
+                ? `ios-warning${focused ? '' : '-outline'}`
+                : 'md-warning';
         }
         return (
           <Ionicons

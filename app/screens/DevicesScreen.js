@@ -2,9 +2,28 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+const styles = StyleSheet.create({
+  rowContainer: {
+    backgroundColor: '#fff',
+    paddingLeft: 15,
+    paddingVertical: 10,
+  },
+  header: {
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 25,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#CED0CE',
+  },
+});
+
+
 export default class DeviceScreen extends React.Component {
   static navigationOptions = {
-    title: 'Devices'
+    title: 'Offline',
+    headerTintColor: "#f44248"
   };
 
   state = {
@@ -17,7 +36,7 @@ export default class DeviceScreen extends React.Component {
         hasLocks: true,
         outageInMinutes: 15629,
         temp: 'RT',
-        status: 'OFFLINE'
+        status: 'OFFLINE',
       },
       {
         iso: 'ch',
@@ -27,7 +46,7 @@ export default class DeviceScreen extends React.Component {
         hasLocks: false,
         outageInMinutes: 177549,
         temp: 'EX',
-        status: 'OFFLINE'
+        status: 'OFFLINE',
       },
       {
         iso: 'de',
@@ -37,7 +56,7 @@ export default class DeviceScreen extends React.Component {
         hasLocks: true,
         outageInMinutes: 7742,
         temp: 'EX',
-        status: 'OFFLINE'
+        status: 'OFFLINE',
       },
       {
         iso: 'de',
@@ -47,16 +66,16 @@ export default class DeviceScreen extends React.Component {
         hasLocks: false,
         outageInMinutes: 42206,
         temp: 'EX',
-        status: 'OFFLINE'
-      }
-    ]
+        status: 'OFFLINE',
+      },
+    ],
   };
 
-  _divider = () => {
+  divider = () => {
     return <View style={styles.divider} />;
   };
 
-  _renderItem = ({ item }) => {
+  renderItem = ({ item }) => {
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.header}>
@@ -86,26 +105,10 @@ export default class DeviceScreen extends React.Component {
       <FlatList
         data={this.state.devices}
         keyExtractor={(item, index) => item.enclosureID}
-        renderItem={this._renderItem}
-        ItemSeparatorComponent={this._divider}
+        renderItem={this.renderItem}
+        ItemSeparatorComponent={this.divider}
       />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  rowContainer: {
-    backgroundColor: '#fff',
-    paddingLeft: 15,
-    paddingVertical: 10
-  },
-  header: {
-    fontSize: 16,
-    fontWeight: '700',
-    lineHeight: 25
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#CED0CE'
-  }
-});
