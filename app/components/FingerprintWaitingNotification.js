@@ -29,10 +29,10 @@ export default class FingerprintWaitingNotification extends React.Component {
         this.props.onFingerprintSuccess();
       } else {
         this.setState({ hasFingerprintAuth: false });
-        alert('Fingerprint Auth Failed');
+        console.log('Fingerprint Auth Failed', result);
       }
     } catch (err) {
-      console.error(err);
+      console.error('authFunction Error', err);
     }
   };
 
