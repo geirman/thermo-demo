@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fingerprint } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 export default class FingerprintWaitingNotification extends React.Component {
   state = {
@@ -20,7 +20,11 @@ export default class FingerprintWaitingNotification extends React.Component {
 
   authFunction = async () => {
     try {
-      let result = await Fingerprint.authenticateAsync();
+      let result =
+        Platform.OS === 'ios'
+          ? await Fingerprint.authenticateAsync('Show me your finger')
+          : await Fingerprint.authenticateAsync();
+
       if (result.success) {
         this.props.onFingerprintSuccess();
       } else {
