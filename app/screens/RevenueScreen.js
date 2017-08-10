@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { VictoryPie, VictoryContainer } from 'victory-native';
 
 export default class RevenueScreen extends React.Component {
@@ -94,6 +94,8 @@ export default class RevenueScreen extends React.Component {
             innerRadius={5}
             labelRadius={150}
             colorScale={['#7D1476', '#D2AF21', '#CA0BBD', '#0B5C53', '#017D6F']}
+            width={Dimensions.get('window').width}
+            padding={15}
             containerComponent={<VictoryContainer height={200} />}
           />
           <Text style={styles.total}>
