@@ -8,14 +8,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
-    "icon": "./assets/icons/tfs-app-icon.png",
+    "icon": "./app/assets/icons/tfs-app-icon.png",
     "notification": {
       "icon": "./assets/icons/tfs-notification-icon.png",
       "color": "#000000"
     },
     "loading": {
-      "icon": "./assets/icons/tfs-notification-icon.png",
-      "backgroundImage": "./assets/images/thermosplash.png",
+      "icon": "./app/assets/icons/tfs-notification-icon.png",
+      "backgroundImage": "./app/assets/images/thermosplash.png",
       "backgroundColor": "#2665b3",
       "hideExponentText": true
     },
