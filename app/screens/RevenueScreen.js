@@ -2,39 +2,10 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { VictoryPie, VictoryContainer } from 'victory-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  scrollview: {
-    paddingBottom: 50,
-  },
-  row: {
-    alignContent: 'space-between',
-    flexDirection: 'row',
-    padding: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#ccc',
-  },
-  textLabel: {
-    flex: 1,
-    fontSize: 16,
-  },
-  textPrice: {
-    flex: 0,
-  },
-  total: {
-    fontSize: 40,
-    color: 'red',
-    alignSelf: 'center',
-  },
-});
-
 export default class RevenueScreen extends React.Component {
   static navigationOptions = {
     title: 'Revenue',
-    headerTintColor: '#f44248',
+    headerTintColor: '#f44248'
   };
 
   state = {
@@ -43,12 +14,12 @@ export default class RevenueScreen extends React.Component {
       { x: 'B', y: 7000, type: 'Express No Locks' },
       { x: 'C', y: 8000, type: 'Express w/Locks' },
       { x: 'D', y: 9000, type: 'Premier' },
-      { x: 'E', y: 10000, type: 'Store' },
-    ],
+      { x: 'E', y: 10000, type: 'Store' }
+    ]
   };
 
   componentDidMount() {
-    setInterval(this.randomUpdateRevenueByType, 1500);
+    setInterval(this.randomUpdateRevenueByType, 700);
   }
 
   getRandom = (min = 1, max = 10) => {
@@ -64,10 +35,10 @@ export default class RevenueScreen extends React.Component {
     const updatedRevenue = [
       ...prefix,
       Object.assign(target[0], { y: target[0].y + inflation }),
-      ...suffix,
+      ...suffix
     ];
     return this.setState({
-      revenueByType: updatedRevenue,
+      revenueByType: updatedRevenue
     });
   };
 
@@ -99,7 +70,7 @@ export default class RevenueScreen extends React.Component {
       (subtotal, item, i) => {
         return subtotal + item.y;
       },
-      0,
+      0
     );
 
     return (
@@ -107,17 +78,17 @@ export default class RevenueScreen extends React.Component {
         <ScrollView style={styles.scrollview}>
           <VictoryPie
             animate={{
-              duration: 500,
+              duration: 400
             }}
             style={{
               labels: {
                 fill: 'white',
                 stroke: 'none',
                 fontSize: 15,
-                fontWeight: 'bold',
-              },
+                fontWeight: 'bold'
+              }
             }}
-            data={this.state.revenueByType}
+            data={[...this.state.revenueByType].reverse()}
             startAngle={90}
             endAngle={-90}
             innerRadius={5}
@@ -134,3 +105,32 @@ export default class RevenueScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  scrollview: {
+    paddingBottom: 50
+  },
+  row: {
+    alignContent: 'space-between',
+    flexDirection: 'row',
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ccc'
+  },
+  textLabel: {
+    flex: 1,
+    fontSize: 16
+  },
+  textPrice: {
+    flex: 0
+  },
+  total: {
+    fontSize: 40,
+    color: 'red',
+    alignSelf: 'center'
+  }
+});
