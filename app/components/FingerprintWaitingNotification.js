@@ -3,9 +3,12 @@ import { Fingerprint } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import { Platform, Text, View } from 'react-native';
 
+import colors from '../constants/Colors';
+
 export default class FingerprintWaitingNotification extends React.Component {
   state = {
-    hasFingerprintAuth: false
+    hasFingerprintAuth: null,
+    authStatus: null // valid values are null, 'wait', 'success', and 'fail'
   };
 
   componentDidMount() {
@@ -26,9 +29,16 @@ export default class FingerprintWaitingNotification extends React.Component {
           : await Fingerprint.authenticateAsync();
 
       if (result.success) {
-        this.props.onFingerprintSuccess();
+        this.setState(
+          { authStatus: 'success' },
+          this.props.onFingerprintSuccess()
+        );
       } else {
-        this.setState({ hasFingerprintAuth: false });
+        this.setState({
+          authStatus: 'fail',
+          hasFingerprintAuth:
+            ['not_enrolled', 'user_cancel'].indexOf(result.error) === -1
+        });
         console.log('Fingerprint Auth Failed', result);
       }
     } catch (err) {
@@ -36,17 +46,57 @@ export default class FingerprintWaitingNotification extends React.Component {
     }
   };
 
+  getAuthStatement = () => {
+    const displayText = this.getMessage(this.state.authStatus); // this.getMessage(this.state.authStatus);
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          backgroundColor: 'rgba(255,255,255,0.8)',
+          paddingHorizontal: 10,
+          borderRadius: 12
+        }}
+      >
+        <Ionicons name={displayText.icon} size={25} color={displayText.color} />
+        <Text
+          style={{
+            fontSize: 20,
+            color: displayText.color,
+            paddingLeft: 10
+          }}
+        >
+          {displayText.text}
+        </Text>
+      </View>
+    );
+  };
+
+  getMessage = status => {
+    const waitText = {
+      icon: 'md-finger-print',
+      color: this.props.waitTextColor,
+      text: 'Waiting for fingerprint...'
+    };
+    const successText = {
+      icon: 'md-checkmark-circle',
+      color: colors.success,
+      text: 'Success! '
+    };
+    const failText = {
+      icon: 'md-alert',
+      color: colors.error,
+      text: 'Fail! Please login'
+    };
+
+    if (status === 'success') return successText;
+    if (status === 'fail') return failText;
+    return waitText;
+  };
+
   render() {
     return (
       <View style={{ padding: 10 }}>
-        {this.state.hasFingerprintAuth
-          ? <View style={{ flexDirection: 'row' }}>
-              <Ionicons name="md-finger-print" size={25} color="white" />
-              <Text style={{ fontSize: 20, color: 'white', paddingLeft: 10 }}>
-                Waiting for fingerprint...
-              </Text>
-            </View>
-          : null}
+        {this.state.hasFingerprintAuth ? this.getAuthStatement() : null}
       </View>
     );
   }

@@ -11,6 +11,7 @@ import {
 import { Video } from 'expo';
 
 import FingerprintWaitingNotification from '../components/FingerprintWaitingNotification';
+import colors from '../constants/Colors';
 
 class LoginScreen extends Component {
   render() {
@@ -51,11 +52,13 @@ class LoginScreen extends Component {
           />
           <Button
             title={this.props.submitting ? 'Submitting...' : 'Submit'}
-            color="#b37426"
+            color={colors.login.buttonColor}
+            disabled={this.props.submiting}
             onPress={this.props.handleLogin}
           />
           <FingerprintWaitingNotification
             onFingerprintSuccess={this.props.handleLogin}
+            waitTextColor={colors.login.buttonColor}
           />
         </KeyboardAvoidingView>
       </View>
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2665b3'
+    backgroundColor: colors.login.background
   },
   header: {
     fontSize: 40,
@@ -82,12 +85,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingLeft: 15,
     fontSize: 20,
-    color: '#b37426'
+    color: colors.login.buttonColor
   },
   login: {
     borderRadius: 10,
     padding: 10,
-    backgroundColor: 'rgba(50,50,50,0.4)'
+    backgroundColor: colors.login.background
   },
   button: {
     height: 50

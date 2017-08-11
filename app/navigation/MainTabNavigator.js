@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 
-import Colors from '../constants/Colors';
+import colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import RevenueScreen from '../screens/RevenueScreen';
@@ -50,7 +50,7 @@ export default TabNavigator(
             name={iconName}
             size={28}
             style={{ marginBottom: -3 }}
-            color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+            color={focused ? colors.tabIconSelected : colors.tabIconDefault}
           />
         );
       }
@@ -58,6 +58,9 @@ export default TabNavigator(
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false
+    swipeEnabled: false,
+    tabBarOptions: {
+      activeTintColor: colors.tabIconSelected
+    }
   }
 );

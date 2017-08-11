@@ -2,10 +2,12 @@ import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { VictoryPie, VictoryContainer } from 'victory-native';
 
+import colors from '../constants/Colors';
+
 export default class RevenueScreen extends React.Component {
   static navigationOptions = {
     title: 'Revenue',
-    headerTintColor: '#f44248'
+    headerTintColor: colors.thermoRed
   };
 
   state = {
@@ -93,7 +95,7 @@ export default class RevenueScreen extends React.Component {
             endAngle={-90}
             innerRadius={5}
             labelRadius={150}
-            colorScale={['#7D1476', '#D2AF21', '#CA0BBD', '#0B5C53', '#017D6F']}
+            colorScale={colors.chart}
             width={Dimensions.get('window').width}
             padding={15}
             containerComponent={<VictoryContainer height={200} />}
@@ -121,18 +123,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
     borderTopWidth: 1,
-    borderTopColor: '#ccc'
+    borderTopColor: colors.divider
   },
   textLabel: {
     flex: 1,
-    fontSize: 16
+    fontSize: 16,
+    color: colors.text
   },
   textPrice: {
     flex: 0
   },
   total: {
     fontSize: 40,
-    color: 'red',
+    color: colors.thermoRed,
     alignSelf: 'center'
   }
 });
